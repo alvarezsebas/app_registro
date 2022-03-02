@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-img class="espacio_header" src="/assets/logo.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="contenido" fullscreen>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10">
+        <ion-card-header class="espacio_titulo">
+          <ion-card-title class="ion-text-center"> <b>Registro de Turno</b></ion-card-title>
+        </ion-card-header>
+        <ion-avatar class="espacio">
+          <ion-img src="/assets/usuario.png"></ion-img>
+        </ion-avatar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <form #fLogin="ngForm" (ngSubmit)="envio(fLogin)">
+
+    <ion-item>
+
+      <ion-input type="tel" 
+      placeholder="Ingrese su cédula" 
+      name="cc"
+      [(ngModel)]="consulta.cc"
+      required></ion-input>
+    </ion-item>
+
+
+    <ion-button [disabled]="fLogin.invalid" type="submit" expand="block">
+      Consultar
+    </ion-button>
+
+
+  </form>
+
+
+</ion-content>
+
+<!-- contenido de los tabs -->
+<!-- <app-header titulo='Registros realizados'></app-header> -->
+
+<ion-content [fullscreen]="true" color="light" *ngIf="inicio">
+  <!-- Refresher -->
+  
+  <ion-refresher slot="fixed" (ionRefresh)="recargar($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Registros -->
+  <ion-title> {{ usuario['nombre'] }} {{ usuario['apellidos'] }} </ion-title>
+
+  <app-registros [registros]=registros></app-registros>
+
+  <!-- Infinite scroll -->
+
+  <ion-infinite-scroll  threshold="150px" [disabled]="!habilitado" position="bottom" (ionInfinite)="siguientes($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
+<ion-tabs *ngIf="tabs">
+  <ion-tab-bar slot="bottom,top">
+    <ion-tab-button tab="tab1">
+      <ion-icon name="flash"> </ion-icon>
+      <ion-label> {{consulta.cc}} </ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="tab2">
+      <ion-icon name="apps"></ion-icon>
+      <ion-label>Tab Two</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="tab3">
+      <ion-icon name="send"></ion-icon>
+      <ion-label>Tab Three</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

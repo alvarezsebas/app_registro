@@ -1,0 +1,34 @@
+<div class='registro'>
+
+  <ion-slides mode="ios" pager="ios" scrollbar="ios" *ngIf="registro.length > 1">
+    <ion-slide *ngFor="let registros of registro; let i=index">
+      <ion-grid>
+        <ion-row>
+          <ion-col >Fecha Ingreso</ion-col>
+          <ion-col >Hora Ingreso</ion-col>
+          <ion-col >Temp</ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col> {{registros.ingreso.fecha | date: "dd.MM.y"}} </ion-col>
+          <ion-col> {{registros.ingreso.fecha | date: "shortTime"}} </ion-col>
+          <ion-col> {{registros.ingreso.temperatura}}°C </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid  >
+        <ion-row>
+          <ion-col >Fecha Salida</ion-col>
+          <ion-col >Hora Salida</ion-col>
+          <ion-col >Temp</ion-col>
+        </ion-row>
+        <ion-row >
+          <ion-col> {{registros.salida.fecha | date: "dd.MM.y"}} </ion-col>
+          <ion-col > {{registros.salida.fecha | date: "shortTime"}} </ion-col>
+          <ion-col> {{registros.salida.temperatura}} °C</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+
+    
+</div>
+
